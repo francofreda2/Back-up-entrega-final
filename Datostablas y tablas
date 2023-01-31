@@ -1,0 +1,1416 @@
+-- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
+--
+-- Host: localhost    Database: megatlon
+-- ------------------------------------------------------
+-- Server version	8.0.31
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `actividades`
+--
+
+DROP TABLE IF EXISTS `actividades`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `actividades` (
+  `id_actividad` int unsigned NOT NULL,
+  `Cod_actividad` int DEFAULT NULL,
+  `Nombre_actividad` char(30) DEFAULT NULL,
+  `Sucursal_actividad` char(30) DEFAULT NULL,
+  `Dias_actividad` varchar(30) DEFAULT NULL,
+  `Horas_actividad` char(30) DEFAULT NULL,
+  PRIMARY KEY (`id_actividad`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `actividades`
+--
+
+LOCK TABLES `actividades` WRITE;
+/*!40000 ALTER TABLE `actividades` DISABLE KEYS */;
+INSERT INTO `actividades` VALUES (1,1,'Musculación','Palermo','Lunes -Martes','19 hs'),(2,2,'Natacion','Devoto','Jueves -Sabados','15 hs'),(3,3,'Crossfit','Centro','Lunes - Miercoles','20 hs'),(4,4,'Salsa','Devoto','Lunes - Viernes','17 hs'),(5,5,'Funciona','Rosario','Martes - Jueves','18 hs');
+/*!40000 ALTER TABLE `actividades` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_insertar_nuevas_actividades_before` BEFORE INSERT ON `actividades` FOR EACH ROW BEGIN
+        INSERT INTO tr_insertar_nuevas_actividades (
+              id_actividad
+            , cod_actividad
+            , Nombre_actividad
+            , Sucursal_actividad
+            ,Dias_actividad
+            ,Horas_actividad
+        ) VALUES (
+            NEW.id_actividad
+            , NEW.cod_actividad
+            , NEW.Nombre_actividad
+            , NEW.Nombre_actividad
+            , NEW. Sucursal_actividad
+            ,NEW.Dias_actividad
+            ,NEW.Horas_actividad
+            , USER()
+        );
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_insertar_nuevas_actividades` AFTER INSERT ON `actividades` FOR EACH ROW BEGIN
+        INSERT INTO materias_cursadas_log (
+              id_actividad
+            , cod_actividad
+            , Nombre_actividad
+            , Sucursal_actividad
+            ,Dias_actividad
+            ,Horas_actividad
+        ) VALUES (
+            NEW.id_actividad
+            , NEW.cod_actividad
+            , NEW.Nombre_actividad
+            , NEW.Nombre_actividad
+            , NEW. Sucursal_actividad
+            ,NEW.Dias_actividad
+            ,NEW.Horas_actividad
+            , USER()
+        );
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_insertar_nuevas_actividades1` AFTER INSERT ON `actividades` FOR EACH ROW BEGIN
+        INSERT INTO tr_insertar_nuevas_actividades (
+              id_actividad
+            , cod_actividad
+            , Nombre_actividad
+            , Sucursal_actividad
+            ,Dias_actividad
+            ,Horas_actividad
+        ) VALUES (
+            NEW.id_actividad
+            , NEW.cod_actividad
+            , NEW.Nombre_actividad
+            , NEW.Nombre_actividad
+            , NEW. Sucursal_actividad
+            ,NEW.Dias_actividad
+            ,NEW.Horas_actividad
+            , USER()
+        );
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `actividades_profesores`
+--
+
+DROP TABLE IF EXISTS `actividades_profesores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `actividades_profesores` (
+  `id_actividad` int unsigned NOT NULL,
+  `id_profesor` int unsigned DEFAULT NULL,
+  `Nombre_actividad` char(20) DEFAULT NULL,
+  `Nombre_profesor` char(20) DEFAULT NULL,
+  `Apellido_profesor` char(20) DEFAULT NULL,
+  PRIMARY KEY (`id_actividad`),
+  KEY `id_profesor` (`id_profesor`),
+  CONSTRAINT `actividades_profesores_ibfk_1` FOREIGN KEY (`id_profesor`) REFERENCES `profesores` (`id_profesor`),
+  CONSTRAINT `actividades_profesores_ibfk_2` FOREIGN KEY (`id_actividad`) REFERENCES `actividades` (`id_actividad`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `actividades_profesores`
+--
+
+LOCK TABLES `actividades_profesores` WRITE;
+/*!40000 ALTER TABLE `actividades_profesores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `actividades_profesores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `alumnos`
+--
+
+DROP TABLE IF EXISTS `alumnos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `alumnos` (
+  `id` int NOT NULL,
+  `nombre` varchar(20) NOT NULL,
+  `apellido` varchar(20) NOT NULL,
+  `correo` varchar(60) DEFAULT NULL,
+  `id_grado` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK1_alumnos` (`id_grado`),
+  CONSTRAINT `FK1_alumnos` FOREIGN KEY (`id_grado`) REFERENCES `grado` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `alumnos`
+--
+
+LOCK TABLES `alumnos` WRITE;
+/*!40000 ALTER TABLE `alumnos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `alumnos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `elementos_limpieza`
+--
+
+DROP TABLE IF EXISTS `elementos_limpieza`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `elementos_limpieza` (
+  `id_elemento` int unsigned NOT NULL AUTO_INCREMENT,
+  `Nombre_elemento` varchar(20) DEFAULT NULL,
+  `precio_elemento` decimal(20,0) DEFAULT NULL,
+  PRIMARY KEY (`id_elemento`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `elementos_limpieza`
+--
+
+LOCK TABLES `elementos_limpieza` WRITE;
+/*!40000 ALTER TABLE `elementos_limpieza` DISABLE KEYS */;
+INSERT INTO `elementos_limpieza` VALUES (1,'Jabon para toallones',100);
+/*!40000 ALTER TABLE `elementos_limpieza` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_insertar_nuevos_elementos` BEFORE INSERT ON `elementos_limpieza` FOR EACH ROW BEGIN
+         INSERT INTO log_elementos_limpieza (  id_elemento,
+         
+       Nombre_elemento  ,
+       precio_elemento)
+               
+          VALUES (
+           new. id_elemento,
+   new.Nombre_elemento ,
+   new. precio_elemento );
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `grado`
+--
+
+DROP TABLE IF EXISTS `grado`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `grado` (
+  `id` int NOT NULL,
+  `descripcion` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `grado`
+--
+
+LOCK TABLES `grado` WRITE;
+/*!40000 ALTER TABLE `grado` DISABLE KEYS */;
+/*!40000 ALTER TABLE `grado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `horas_actividades`
+--
+
+DROP TABLE IF EXISTS `horas_actividades`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `horas_actividades` (
+  `hora_actividad` char(50) DEFAULT NULL,
+  `nombre_actividad` varchar(100) NOT NULL,
+  PRIMARY KEY (`nombre_actividad`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `horas_actividades`
+--
+
+LOCK TABLES `horas_actividades` WRITE;
+/*!40000 ALTER TABLE `horas_actividades` DISABLE KEYS */;
+INSERT INTO `horas_actividades` VALUES ('17 hs','Crossfit'),('17 hs','Funciona'),('17 hs','Musculación'),('17 hs','Natacion'),('17 hs','Salsa');
+/*!40000 ALTER TABLE `horas_actividades` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `instrumentos_deportivos`
+--
+
+DROP TABLE IF EXISTS `instrumentos_deportivos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `instrumentos_deportivos` (
+  `id_instrumento` int unsigned NOT NULL AUTO_INCREMENT,
+  `Nombre_instrumento` varchar(20) DEFAULT NULL,
+  `precio_instrumento` decimal(20,0) DEFAULT NULL,
+  PRIMARY KEY (`id_instrumento`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `instrumentos_deportivos`
+--
+
+LOCK TABLES `instrumentos_deportivos` WRITE;
+/*!40000 ALTER TABLE `instrumentos_deportivos` DISABLE KEYS */;
+INSERT INTO `instrumentos_deportivos` VALUES (1,'Ketebell',35);
+/*!40000 ALTER TABLE `instrumentos_deportivos` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_insertar_nuevos_materiales` AFTER INSERT ON `instrumentos_deportivos` FOR EACH ROW BEGIN
+         INSERT INTO logs_instrumentos_deportivos  (  id_instrumento,
+         
+       Nombre_instrumento  ,
+       precio_instrumento)
+               
+          VALUES (
+           new. id_instrumento,
+   new.nombre_instrumento ,
+   new. precio_instrumento );
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `log_elementos_limpieza`
+--
+
+DROP TABLE IF EXISTS `log_elementos_limpieza`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `log_elementos_limpieza` (
+  `id_elemento` int unsigned NOT NULL AUTO_INCREMENT,
+  `Nombre_elemento` varchar(20) DEFAULT NULL,
+  `precio_elemento` decimal(20,0) DEFAULT NULL,
+  PRIMARY KEY (`id_elemento`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `log_elementos_limpieza`
+--
+
+LOCK TABLES `log_elementos_limpieza` WRITE;
+/*!40000 ALTER TABLE `log_elementos_limpieza` DISABLE KEYS */;
+INSERT INTO `log_elementos_limpieza` VALUES (1,'Jabon para toallones',100);
+/*!40000 ALTER TABLE `log_elementos_limpieza` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `logs_instrumentos_deportivos`
+--
+
+DROP TABLE IF EXISTS `logs_instrumentos_deportivos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `logs_instrumentos_deportivos` (
+  `id_instrumento` int unsigned NOT NULL AUTO_INCREMENT,
+  `Nombre_instrumento` varchar(20) DEFAULT NULL,
+  `precio_instrumento` decimal(20,0) DEFAULT NULL,
+  PRIMARY KEY (`id_instrumento`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logs_instrumentos_deportivos`
+--
+
+LOCK TABLES `logs_instrumentos_deportivos` WRITE;
+/*!40000 ALTER TABLE `logs_instrumentos_deportivos` DISABLE KEYS */;
+INSERT INTO `logs_instrumentos_deportivos` VALUES (1,'pesa rusa',35);
+/*!40000 ALTER TABLE `logs_instrumentos_deportivos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `materias`
+--
+
+DROP TABLE IF EXISTS `materias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `materias` (
+  `id` int NOT NULL,
+  `descripcion` varchar(80) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `materias`
+--
+
+LOCK TABLES `materias` WRITE;
+/*!40000 ALTER TABLE `materias` DISABLE KEYS */;
+/*!40000 ALTER TABLE `materias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `materias_cursadas`
+--
+
+DROP TABLE IF EXISTS `materias_cursadas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `materias_cursadas` (
+  `id_alumno` int NOT NULL,
+  `id_materia` int NOT NULL,
+  `fecha_inscripcion` date DEFAULT NULL,
+  PRIMARY KEY (`id_alumno`,`id_materia`),
+  KEY `FK2_materias_cursadas` (`id_materia`),
+  CONSTRAINT `FK1_materias_cursadas` FOREIGN KEY (`id_alumno`) REFERENCES `alumnos` (`id`),
+  CONSTRAINT `FK2_materias_cursadas` FOREIGN KEY (`id_materia`) REFERENCES `materias` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `materias_cursadas`
+--
+
+LOCK TABLES `materias_cursadas` WRITE;
+/*!40000 ALTER TABLE `materias_cursadas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `materias_cursadas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `materias_cursadas_log`
+--
+
+DROP TABLE IF EXISTS `materias_cursadas_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `materias_cursadas_log` (
+  `id_alumno` int NOT NULL,
+  `id_materia` int NOT NULL,
+  `fecha_inscripcion` date DEFAULT NULL,
+  `usuario_alta` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `materias_cursadas_log`
+--
+
+LOCK TABLES `materias_cursadas_log` WRITE;
+/*!40000 ALTER TABLE `materias_cursadas_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `materias_cursadas_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `new_games`
+--
+
+DROP TABLE IF EXISTS `new_games`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `new_games` (
+  `id_game` int NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `description` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`id_game`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `new_games`
+--
+
+LOCK TABLES `new_games` WRITE;
+/*!40000 ALTER TABLE `new_games` DISABLE KEYS */;
+/*!40000 ALTER TABLE `new_games` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `obra_social`
+--
+
+DROP TABLE IF EXISTS `obra_social`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `obra_social` (
+  `id_obra_social` int unsigned NOT NULL AUTO_INCREMENT,
+  `Cod_obra_social` int DEFAULT NULL,
+  `CUIL` decimal(20,0) DEFAULT NULL,
+  `Nombre_obr_soc` char(20) DEFAULT NULL,
+  `Tel_obra_soc` decimal(20,0) DEFAULT NULL,
+  `Direccion_obr_soc` char(40) DEFAULT NULL,
+  `Certificado_medico_activo` char(20) DEFAULT NULL,
+  PRIMARY KEY (`id_obra_social`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `obra_social`
+--
+
+LOCK TABLES `obra_social` WRITE;
+/*!40000 ALTER TABLE `obra_social` DISABLE KEYS */;
+INSERT INTO `obra_social` VALUES (1,1,3040830028,'Swiss medical',46399860,'Moron 337','1'),(2,2,2909086789,'Osde',63809976,'Moliere 887','1'),(3,3,3056768590,'Galeno',45408967,'Padre fahy 2890','1'),(4,4,2903469123,'Hospital britanico',45478920,'Joaquin b gonzalez 43','1'),(5,5,3040978592,'Hospital italiano',63907764,'Juan b Justo 2330','1');
+/*!40000 ALTER TABLE `obra_social` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `obrasocial_socios`
+--
+
+DROP TABLE IF EXISTS `obrasocial_socios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `obrasocial_socios` (
+  `id_socios` int unsigned NOT NULL,
+  `id_obra_social` int unsigned DEFAULT NULL,
+  `obra_social` char(20) DEFAULT NULL,
+  `Nombre_soc` char(20) DEFAULT NULL,
+  `Apellido_soc` char(20) DEFAULT NULL,
+  PRIMARY KEY (`id_socios`),
+  KEY `id_obra_social` (`id_obra_social`),
+  CONSTRAINT `obrasocial_socios_ibfk_1` FOREIGN KEY (`id_socios`) REFERENCES `socios` (`id_socio`),
+  CONSTRAINT `obrasocial_socios_ibfk_2` FOREIGN KEY (`id_obra_social`) REFERENCES `obra_social` (`id_obra_social`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `obrasocial_socios`
+--
+
+LOCK TABLES `obrasocial_socios` WRITE;
+/*!40000 ALTER TABLE `obrasocial_socios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `obrasocial_socios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `profesores`
+--
+
+DROP TABLE IF EXISTS `profesores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `profesores` (
+  `id_profesor` int unsigned NOT NULL AUTO_INCREMENT,
+  `Cod_profesor` int DEFAULT NULL,
+  `Dni_profesor` decimal(40,0) DEFAULT NULL,
+  `Nombre_profesor` char(20) DEFAULT NULL,
+  `Apellido_profesor` char(20) DEFAULT NULL,
+  `Tel_profesor` decimal(40,0) DEFAULT NULL,
+  `Direccion_profesor` char(40) DEFAULT NULL,
+  `Certificado_medico_activo` char(20) DEFAULT NULL,
+  `Sucursal_trabaja` varchar(20) DEFAULT NULL,
+  `Obra_social_profesor` varchar(20) DEFAULT NULL,
+  `Actividad_que_realiza` varchar(20) DEFAULT NULL,
+  `id_sucursal` int unsigned DEFAULT NULL,
+  PRIMARY KEY (`id_profesor`),
+  KEY `id_sucursal` (`id_sucursal`),
+  CONSTRAINT `profesores_ibfk_1` FOREIGN KEY (`id_sucursal`) REFERENCES `sucursal` (`id_sucursal`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `profesores`
+--
+
+LOCK TABLES `profesores` WRITE;
+/*!40000 ALTER TABLE `profesores` DISABLE KEYS */;
+INSERT INTO `profesores` VALUES (1,1,1890330481,'Agustin','De rosa',1567353961,'Galvan 34','Si','Devoto','Osde','Administrativo',1),(2,2,408307,'Julieta','Palmeiro',1563986745,'Tucuman 23','No','Almagro','Osde','Crossfit',3),(3,3,236751,'Anabella','Gonzalez',1598764987,'Av de Mayo 2055','SI','Palermo','Osde','Musculación',2),(4,4,419807,'Juan Cruz','Comez',1539567835,'Av Beiro 7699','No','Centro1','Osde','Administrativo',5),(5,5,409806,'Rosario','Fernandez',1535328645,'Juan agustín garcía 789','No','Centro 2','Osde','Natación',6),(6,6,258976,'Patricio','Estrella',1578467132,'Margariño Cervantes 542','No','Rosario','Osde','Crossfit',4),(7,7,352940,'Lucas','Granzoto',1590405879,'Irigoyen 225','Si','Palermo ','Osde','Administrativo',2),(8,8,458970,'Julian','Alvarez',1576984520,'Alvarez jonte 8493','Si','Devoto','Osde','Musculación',1),(9,9,408900,'Sofia','Gutierrez',1594785644,'Av Perón 8393','Si','Centro 1','Osde','Administrativo',5);
+/*!40000 ALTER TABLE `profesores` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_insertar_nuevaos_profesores` AFTER INSERT ON `profesores` FOR EACH ROW BEGIN
+        INSERT INTO tr_insertar_nuevos_profesores (
+              id_profesor
+            , cod_profesor
+            ,dni_profesor
+            , Nombre_profesor
+            , apellido_profesor
+            ,tel_profesor
+            ,Direccion_profesor
+            ,Certificado_medico_activo
+            ,Sucursal_trabaja
+            ,Obra_social_profesor
+            ,Actividad_que_realiza
+            ,id_sucursal
+            ,Horas_actividad
+        ) VALUES (
+            
+            NEW.id_profesor
+            , NEW.cod_profesor
+            ,NEW.dni_profesor
+            , NEW.Nombre_profesor
+            , NEW.apellido_profesor
+            ,NEW.tel_profesor
+            ,NEW.Direccion_profesor
+            ,NEW.Certificado_medico_activo
+            ,NEW.Sucursal_trabaja
+            ,NEW.Obra_social_profesor
+            ,NEW.Actividad_que_realiza
+            ,NEW.id_sucursal
+            , USER()
+        );
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Temporary view structure for view `profesores_en_caba`
+--
+
+DROP TABLE IF EXISTS `profesores_en_caba`;
+/*!50001 DROP VIEW IF EXISTS `profesores_en_caba`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `profesores_en_caba` AS SELECT 
+ 1 AS `id_profesor`,
+ 1 AS `Cod_profesor`,
+ 1 AS `Dni_profesor`,
+ 1 AS `Nombre_profesor`,
+ 1 AS `Apellido_profesor`,
+ 1 AS `Tel_profesor`,
+ 1 AS `Direccion_profesor`,
+ 1 AS `Certificado_medico_activo`,
+ 1 AS `Sucursal_trabaja`,
+ 1 AS `Obra_social_profesor`,
+ 1 AS `Actividad_que_realiza`,
+ 1 AS `id_sucursal`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `profesores_en_provincia`
+--
+
+DROP TABLE IF EXISTS `profesores_en_provincia`;
+/*!50001 DROP VIEW IF EXISTS `profesores_en_provincia`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `profesores_en_provincia` AS SELECT 
+ 1 AS `id_profesor`,
+ 1 AS `Cod_profesor`,
+ 1 AS `Dni_profesor`,
+ 1 AS `Nombre_profesor`,
+ 1 AS `Apellido_profesor`,
+ 1 AS `Tel_profesor`,
+ 1 AS `Direccion_profesor`,
+ 1 AS `Certificado_medico_activo`,
+ 1 AS `Sucursal_trabaja`,
+ 1 AS `Obra_social_profesor`,
+ 1 AS `Actividad_que_realiza`,
+ 1 AS `id_sucursal`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `promociones`
+--
+
+DROP TABLE IF EXISTS `promociones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `promociones` (
+  `id_promocion` int unsigned NOT NULL AUTO_INCREMENT,
+  `id_socio` int unsigned NOT NULL,
+  `Cod_promocion` int DEFAULT NULL,
+  `Nombre_promocion` varchar(20) DEFAULT NULL,
+  `Tel_socio` decimal(20,0) DEFAULT NULL,
+  `Medio_de_pago_aceptado` varchar(20) DEFAULT NULL,
+  `Banco_aceptado` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id_promocion`),
+  KEY `id_socio` (`id_socio`),
+  CONSTRAINT `promociones_ibfk_1` FOREIGN KEY (`id_socio`) REFERENCES `socios` (`id_socio`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `promociones`
+--
+
+LOCK TABLES `promociones` WRITE;
+/*!40000 ALTER TABLE `promociones` DISABLE KEYS */;
+INSERT INTO `promociones` VALUES (1,1,NULL,'Gympass',1,'Tajeta de crédito','Todos'),(2,2,NULL,'Convenio empresas',1,'Tajeta de crédito','Todos'),(3,3,NULL,'Banco Frances',1,'Tajeta de crédito','Banco frances'),(4,4,NULL,'American express',1,'Tajeta de crédito','American express'),(5,1,NULL,'Gympass',1,'Tajeta de crédito','Todos'),(6,1,NULL,'Gympass',1,'Tajeta de crédito','Todos');
+/*!40000 ALTER TABLE `promociones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `promociones_adqueridas`
+--
+
+DROP TABLE IF EXISTS `promociones_adqueridas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `promociones_adqueridas` (
+  `id_socios` int unsigned NOT NULL,
+  `id_promocion` int unsigned DEFAULT NULL,
+  `Nombre_soc` char(20) DEFAULT NULL,
+  `Apellido_soc` char(20) DEFAULT NULL,
+  `Nombre_promocion` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id_socios`),
+  KEY `id_promocion` (`id_promocion`),
+  CONSTRAINT `promociones_adqueridas_ibfk_1` FOREIGN KEY (`id_socios`) REFERENCES `socios` (`id_socio`),
+  CONSTRAINT `promociones_adqueridas_ibfk_2` FOREIGN KEY (`id_promocion`) REFERENCES `promociones` (`id_promocion`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `promociones_adqueridas`
+--
+
+LOCK TABLES `promociones_adqueridas` WRITE;
+/*!40000 ALTER TABLE `promociones_adqueridas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `promociones_adqueridas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `promociones_convenio`
+--
+
+DROP TABLE IF EXISTS `promociones_convenio`;
+/*!50001 DROP VIEW IF EXISTS `promociones_convenio`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `promociones_convenio` AS SELECT 
+ 1 AS `id_promocion`,
+ 1 AS `id_socio`,
+ 1 AS `Cod_promocion`,
+ 1 AS `Nombre_promocion`,
+ 1 AS `Tel_socio`,
+ 1 AS `Medio_de_pago_aceptado`,
+ 1 AS `Banco_aceptado`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `socios`
+--
+
+DROP TABLE IF EXISTS `socios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `socios` (
+  `id_socio` int unsigned NOT NULL AUTO_INCREMENT,
+  `Cod_socio` int DEFAULT NULL,
+  `Dni` decimal(20,0) DEFAULT NULL,
+  `Nombre_soc` char(20) DEFAULT NULL,
+  `Apellido_soc` char(20) DEFAULT NULL,
+  `Tel_socio` decimal(20,0) DEFAULT NULL,
+  `Direccion_socio` char(40) DEFAULT NULL,
+  `Certificado_medico_activo` char(20) DEFAULT NULL,
+  `Promocion_activa` char(20) NOT NULL,
+  `Sucursal_asiste` char(20) DEFAULT NULL,
+  `ID_promocion_activa` char(20) DEFAULT NULL,
+  `Obra_social_socios` char(40) DEFAULT NULL,
+  PRIMARY KEY (`id_socio`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `socios`
+--
+
+LOCK TABLES `socios` WRITE;
+/*!40000 ALTER TABLE `socios` DISABLE KEYS */;
+INSERT INTO `socios` VALUES (1,1,17,'EMILIO','BARGO',4540220,NULL,'1','1',NULL,NULL,NULL),(2,2,17,'LEONARDO','LEYES',4544106,NULL,'1','2',NULL,NULL,NULL),(3,3,17,'CANDELA',' DANERI',4544647,NULL,'1','3',NULL,NULL,NULL),(4,4,17,'GEORGINA','CAMMERTONI',4545148,NULL,'1','1',NULL,NULL,NULL),(5,5,17,'OMAR','COGNETTA',4546100,NULL,'1','2',NULL,NULL,NULL),(6,6,17,'SOFIA','HAYDEE SALES',4547221,NULL,'1','3',NULL,NULL,NULL),(7,7,17,'MIGUE A','ANGEL FERRARIO',4550085,NULL,'1','2',NULL,NULL,NULL),(8,8,17,'LUCÍA C','CALVO',4550154,NULL,'1','1',NULL,NULL,NULL),(9,9,17,'ISAIAS','EZEQUIEL GAFOS',4550537,NULL,'1','4',NULL,NULL,NULL),(10,10,17,'CLAUDIA','A BEATRIZ CRIVE',4552599,NULL,'1','4',NULL,NULL,NULL),(11,11,17,'JULIETA','A RODRIGUEZ',4553735,NULL,'1','4',NULL,NULL,NULL),(12,12,17,'AGOSTIN','NA SAPIEHA',4553841,NULL,'1','3',NULL,NULL,NULL),(13,13,17,'GABRIEL','L FERREYRA',4553911,NULL,'1','3',NULL,NULL,NULL),(14,14,17,'LUCAS P','PULICE',4554328,NULL,'1','3',NULL,NULL,NULL),(15,15,17,'CARLOS',' ROTELA',4555795,NULL,'1','3',NULL,NULL,NULL),(16,16,17,'SOLEDAD','D MARTIN',4558974,NULL,'1','3',NULL,NULL,NULL),(17,17,17,'BRAIAN','BRITO',4560591,NULL,'1','3',NULL,NULL,NULL),(18,18,17,'MARÍA F','FLORENCIA CAREN',4560806,NULL,'no','3',NULL,NULL,NULL),(19,19,17,'GISELA','MIRTA ALEMAN',4560991,NULL,'1','3',NULL,NULL,NULL),(20,20,17,'ANAHI Z','ZULMA FARFAN',4561718,NULL,'1','1',NULL,NULL,NULL),(21,21,17,'BRUNO A','ARIEL SÁNCHEZ',4563371,NULL,'1','1',NULL,NULL,NULL),(22,22,17,'PABLO A','ADRIAN  GONZALE',4563883,NULL,'1','1',NULL,NULL,NULL),(23,23,17,'DYD SOL','LUCIONES TECNOL',4564486,NULL,'1','1',NULL,NULL,NULL),(24,24,17,'ADOLFO','ESPINOLA',4565793,NULL,'1','1',NULL,NULL,NULL),(25,25,17,'NICOLAS','S ZARTARYAN',4568408,NULL,'1','1',NULL,NULL,NULL),(26,26,17,'MARTÍN','JALILE',9416,NULL,'1','2',NULL,NULL,NULL),(27,27,17,'CRISTINA',' PERROTA',15644,NULL,'1','1',NULL,NULL,NULL),(28,28,17,'PABLO S','SEBASTIAN MUÑIZ',35296,NULL,'1','2',NULL,NULL,NULL),(30,30,17,'ALEJAND','DRINA ITOIZ',51777,NULL,'1','4',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `socios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sucursal`
+--
+
+DROP TABLE IF EXISTS `sucursal`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sucursal` (
+  `id_sucursal` int unsigned NOT NULL,
+  `Cod_sucursal` int DEFAULT NULL,
+  `Nombre_sucursal` char(20) DEFAULT NULL,
+  `Tel_sucursal` decimal(40,0) DEFAULT NULL,
+  `Direccion_sucursal` char(40) DEFAULT NULL,
+  PRIMARY KEY (`id_sucursal`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sucursal`
+--
+
+LOCK TABLES `sucursal` WRITE;
+/*!40000 ALTER TABLE `sucursal` DISABLE KEYS */;
+INSERT INTO `sucursal` VALUES (1,1,'Devoto',46398760,'Av francisco beiro 4509'),(2,2,'Palermo',45426754,'Carrasco 899'),(3,3,'Almagro',45406578,'Nogoya 60'),(4,4,'Rosario',63807768,'Martin fierro 4055'),(5,5,'Centro 1',22809765,'Garcia del río 89'),(6,6,'Centro 2',46389876,'Bermudez 123'),(7,1,'Lanus',46398760,'Echenagucia 100');
+/*!40000 ALTER TABLE `sucursal` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_insertar_nuevas_sucusales` BEFORE INSERT ON `sucursal` FOR EACH ROW BEGIN
+        INSERT INTO tr_insertar_nuevas_sucusales (  id_sucursal,
+      Cod_sucursal ,
+      Nombre_sucursal ,
+      Tel_sucursal ,
+      Direccion_sucursal )
+              
+         VALUES (
+          new. id_sucursal,
+		new.Cod_sucursal ,
+		new. Nombre_sucursal ,
+		new.Tel_sucursal ,
+		new. Direccion_sucursal 
+            , USER()
+        );
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `sucursal_asistida`
+--
+
+DROP TABLE IF EXISTS `sucursal_asistida`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sucursal_asistida` (
+  `id_socios` int unsigned NOT NULL,
+  `id_sucursal` int unsigned DEFAULT NULL,
+  `Nombre_sucursal` char(20) DEFAULT NULL,
+  `Tel_sucursal` decimal(20,0) DEFAULT NULL,
+  `Direccion_sucursal` char(20) DEFAULT NULL,
+  PRIMARY KEY (`id_socios`),
+  KEY `id_sucursal` (`id_sucursal`),
+  CONSTRAINT `sucursal_asistida_ibfk_1` FOREIGN KEY (`id_socios`) REFERENCES `socios` (`id_socio`),
+  CONSTRAINT `sucursal_asistida_ibfk_2` FOREIGN KEY (`id_sucursal`) REFERENCES `sucursal` (`id_sucursal`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sucursal_asistida`
+--
+
+LOCK TABLES `sucursal_asistida` WRITE;
+/*!40000 ALTER TABLE `sucursal_asistida` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sucursal_asistida` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `sucursales_caba`
+--
+
+DROP TABLE IF EXISTS `sucursales_caba`;
+/*!50001 DROP VIEW IF EXISTS `sucursales_caba`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `sucursales_caba` AS SELECT 
+ 1 AS `id_sucursal`,
+ 1 AS `Cod_sucursal`,
+ 1 AS `Nombre_sucursal`,
+ 1 AS `Tel_sucursal`,
+ 1 AS `Direccion_sucursal`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `sucursales_provincia`
+--
+
+DROP TABLE IF EXISTS `sucursales_provincia`;
+/*!50001 DROP VIEW IF EXISTS `sucursales_provincia`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `sucursales_provincia` AS SELECT 
+ 1 AS `id_sucursal`,
+ 1 AS `Cod_sucursal`,
+ 1 AS `Nombre_sucursal`,
+ 1 AS `Tel_sucursal`,
+ 1 AS `Direccion_sucursal`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `test1`
+--
+
+DROP TABLE IF EXISTS `test1`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `test1` (
+  `a1` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test1`
+--
+
+LOCK TABLES `test1` WRITE;
+/*!40000 ALTER TABLE `test1` DISABLE KEYS */;
+/*!40000 ALTER TABLE `test1` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `test2`
+--
+
+DROP TABLE IF EXISTS `test2`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `test2` (
+  `a2` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `test2`
+--
+
+LOCK TABLES `test2` WRITE;
+/*!40000 ALTER TABLE `test2` DISABLE KEYS */;
+/*!40000 ALTER TABLE `test2` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tr_insertar_nuevas_actividades`
+--
+
+DROP TABLE IF EXISTS `tr_insertar_nuevas_actividades`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tr_insertar_nuevas_actividades` (
+  `id_actividad` int unsigned NOT NULL,
+  `cod_actividad` int DEFAULT NULL,
+  `Nombre_actividad` varchar(40) DEFAULT NULL,
+  `Sucursal_actividad` varchar(40) DEFAULT NULL,
+  `Dias_actividad` varchar(40) DEFAULT NULL,
+  `Horas_actividad` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`id_actividad`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tr_insertar_nuevas_actividades`
+--
+
+LOCK TABLES `tr_insertar_nuevas_actividades` WRITE;
+/*!40000 ALTER TABLE `tr_insertar_nuevas_actividades` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tr_insertar_nuevas_actividades` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tr_insertar_nuevas_promociones`
+--
+
+DROP TABLE IF EXISTS `tr_insertar_nuevas_promociones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tr_insertar_nuevas_promociones` (
+  `id_promocion` int unsigned NOT NULL AUTO_INCREMENT,
+  `id_socio` int unsigned NOT NULL,
+  `Cod_promocion` int DEFAULT NULL,
+  `Nombre_promocion` varchar(20) DEFAULT NULL,
+  `Tel_socio` decimal(20,0) DEFAULT NULL,
+  `Medio_de_pago_aceptado` varchar(20) DEFAULT NULL,
+  `Banco_aceptado` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id_promocion`),
+  KEY `id_socio` (`id_socio`),
+  CONSTRAINT `tr_insertar_nuevas_promociones_ibfk_1` FOREIGN KEY (`id_socio`) REFERENCES `socios` (`id_socio`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tr_insertar_nuevas_promociones`
+--
+
+LOCK TABLES `tr_insertar_nuevas_promociones` WRITE;
+/*!40000 ALTER TABLE `tr_insertar_nuevas_promociones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tr_insertar_nuevas_promociones` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `tr_insertar_nuevas_promociones` AFTER INSERT ON `tr_insertar_nuevas_promociones` FOR EACH ROW BEGIN
+        INSERT INTO promociones (  
+              id_promocion
+            , id_socio
+            , cod_promocion
+            , nombre_promocion
+            ,tel_socio
+            ,medio_de_pago_aceptado
+            ,Banco_aceptado
+        ) VALUES (
+            NEW.id_promocion
+            , NEW.cod_promocion
+            , NEW.Nombre_promocion
+            , NEW.tel_socio
+            , NEW. medio_de_pago_aceptado
+            ,NEW.banco_aceptado
+            , USER()
+        );
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `tr_insertar_nuevas_sucusales`
+--
+
+DROP TABLE IF EXISTS `tr_insertar_nuevas_sucusales`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tr_insertar_nuevas_sucusales` (
+  `id_nueva_sucursal` int NOT NULL AUTO_INCREMENT,
+  `id_sucursal` int unsigned DEFAULT NULL,
+  `Cod_sucursal` int DEFAULT NULL,
+  `Nombre_sucursal` char(20) DEFAULT NULL,
+  `Tel_sucursal` decimal(8,0) DEFAULT NULL,
+  `Direccion_sucursal` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id_nueva_sucursal`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tr_insertar_nuevas_sucusales`
+--
+
+LOCK TABLES `tr_insertar_nuevas_sucusales` WRITE;
+/*!40000 ALTER TABLE `tr_insertar_nuevas_sucusales` DISABLE KEYS */;
+INSERT INTO `tr_insertar_nuevas_sucusales` VALUES (1,6,3,'Banco Frances',44,'jonte 10');
+/*!40000 ALTER TABLE `tr_insertar_nuevas_sucusales` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `vista_socios_antiguos`
+--
+
+DROP TABLE IF EXISTS `vista_socios_antiguos`;
+/*!50001 DROP VIEW IF EXISTS `vista_socios_antiguos`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `vista_socios_antiguos` AS SELECT 
+ 1 AS `id_socio`,
+ 1 AS `Cod_socio`,
+ 1 AS `Dni`,
+ 1 AS `Nombre_soc`,
+ 1 AS `Apellido_soc`,
+ 1 AS `Tel_socio`,
+ 1 AS `Direccion_socio`,
+ 1 AS `Certificado_medico_activo`,
+ 1 AS `Promocion_activa`,
+ 1 AS `Sucursal_asiste`,
+ 1 AS `ID_promocion_activa`,
+ 1 AS `Obra_social_socios`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping routines for database 'megatlon'
+--
+/*!50003 DROP FUNCTION IF EXISTS `CuotaConAjusteInflacionario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `CuotaConAjusteInflacionario`(
+	Ajusteporinflacion DECIMAL(10,2),
+	cuota DECIMAL(10,2)) RETURNS decimal(10,2)
+    DETERMINISTIC
+BEGIN
+    DECLARE Aumento DECIMAL(10,2);
+    DECLARE PrecioAjustado DECIMAL(10,2);
+
+  SET Aumento = (cuota * Ajusteporinflacion);
+ SET PrecioAjustado = (Aumento + cuota);
+	-- return the customer level
+	RETURN (PrecioAjustado);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP FUNCTION IF EXISTS `CustomerLevel` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `CustomerLevel`(
+	credit DECIMAL(10,2)
+) RETURNS varchar(20) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+    DECLARE customerLevel VARCHAR(20);
+
+    IF credit > 50000 THEN
+		SET customerLevel = 'PLATINUM';
+    ELSEIF (credit >= 50000 AND 
+			credit <= 10000) THEN
+        SET customerLevel = 'GOLD';
+    ELSEIF credit < 10000 THEN
+        SET customerLevel = 'SILVER';
+    END IF;
+	-- return the customer level
+	RETURN (customerLevel);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP FUNCTION IF EXISTS `Distribucion_profesores` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `Distribucion_profesores`(
+	Hora int (10)
+) RETURNS varchar(40) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+    DECLARE MomentoDelDia varchar(20);
+
+    IF Hora > 7 THEN
+		SET MomentoDelDia = 'Ma;ana';
+    ELSEIF (credit >= 13 AND 
+			credit <= 19) THEN
+        SET MomentoDelDia = 'Tarde';
+    ELSEIF (credit >= 20 AND 
+			credit <= 24) THEN
+        SET MomentoDelDia = 'Noche';
+    END IF;
+	-- return the customer level
+	RETURN (MomentoDelDia);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP FUNCTION IF EXISTS `turnos` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `turnos`(
+
+	hora INT) RETURNS varchar(40) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+
+DECLARE momento_del_dia varchar(40);
+
+IF hora > 20 AND hora <= 24 THEN
+
+SET momento_del_dia = 'Noche';
+
+ELSEIF hora > 13 AND hora <= 20 THEN
+
+SET momento_del_dia = 'Tarde';
+
+ELSEIF hora >= 7 THEN
+
+SET momento_del_dia = 'Mañana';
+
+END IF;
+
+RETURN momento_del_dia;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ctr_customers` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ctr_customers`(ctr VARCHAR(50))
+BEGIN
+SELECT Dias_actividad
+FROM actividades
+WHERE Nombre_actividad  = ctr;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Dias_actividades` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Dias_actividades`(actividad VARCHAR(50))
+BEGIN
+SELECT Dias_actividad
+FROM actividades
+WHERE Nombre_actividad  = actividad;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `horas_actividades` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `horas_actividades`(horas_actividad CHAR(50))
+BEGIN
+insert into  horas_actividades
+SELECT  horas_actividad, nombre_actividad
+FROM actividades
+WHERE horas_actividad  = horas_actividad;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Final view structure for view `profesores_en_caba`
+--
+
+/*!50001 DROP VIEW IF EXISTS `profesores_en_caba`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `profesores_en_caba` AS select `profesores`.`id_profesor` AS `id_profesor`,`profesores`.`Cod_profesor` AS `Cod_profesor`,`profesores`.`Dni_profesor` AS `Dni_profesor`,`profesores`.`Nombre_profesor` AS `Nombre_profesor`,`profesores`.`Apellido_profesor` AS `Apellido_profesor`,`profesores`.`Tel_profesor` AS `Tel_profesor`,`profesores`.`Direccion_profesor` AS `Direccion_profesor`,`profesores`.`Certificado_medico_activo` AS `Certificado_medico_activo`,`profesores`.`Sucursal_trabaja` AS `Sucursal_trabaja`,`profesores`.`Obra_social_profesor` AS `Obra_social_profesor`,`profesores`.`Actividad_que_realiza` AS `Actividad_que_realiza`,`profesores`.`id_sucursal` AS `id_sucursal` from `profesores` where (`profesores`.`Sucursal_trabaja` in ('Devoto','Palermo','Centro 1 ','Centro 2 ')) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `profesores_en_provincia`
+--
+
+/*!50001 DROP VIEW IF EXISTS `profesores_en_provincia`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `profesores_en_provincia` AS select `profesores`.`id_profesor` AS `id_profesor`,`profesores`.`Cod_profesor` AS `Cod_profesor`,`profesores`.`Dni_profesor` AS `Dni_profesor`,`profesores`.`Nombre_profesor` AS `Nombre_profesor`,`profesores`.`Apellido_profesor` AS `Apellido_profesor`,`profesores`.`Tel_profesor` AS `Tel_profesor`,`profesores`.`Direccion_profesor` AS `Direccion_profesor`,`profesores`.`Certificado_medico_activo` AS `Certificado_medico_activo`,`profesores`.`Sucursal_trabaja` AS `Sucursal_trabaja`,`profesores`.`Obra_social_profesor` AS `Obra_social_profesor`,`profesores`.`Actividad_que_realiza` AS `Actividad_que_realiza`,`profesores`.`id_sucursal` AS `id_sucursal` from `profesores` where (`profesores`.`Sucursal_trabaja` in ('Almagro','Rosario')) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `promociones_convenio`
+--
+
+/*!50001 DROP VIEW IF EXISTS `promociones_convenio`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `promociones_convenio` AS select `promociones`.`id_promocion` AS `id_promocion`,`promociones`.`id_socio` AS `id_socio`,`promociones`.`Cod_promocion` AS `Cod_promocion`,`promociones`.`Nombre_promocion` AS `Nombre_promocion`,`promociones`.`Tel_socio` AS `Tel_socio`,`promociones`.`Medio_de_pago_aceptado` AS `Medio_de_pago_aceptado`,`promociones`.`Banco_aceptado` AS `Banco_aceptado` from `promociones` where (`promociones`.`Nombre_promocion` = 'Convenio empresas') */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `sucursales_caba`
+--
+
+/*!50001 DROP VIEW IF EXISTS `sucursales_caba`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `sucursales_caba` AS select `sucursal`.`id_sucursal` AS `id_sucursal`,`sucursal`.`Cod_sucursal` AS `Cod_sucursal`,`sucursal`.`Nombre_sucursal` AS `Nombre_sucursal`,`sucursal`.`Tel_sucursal` AS `Tel_sucursal`,`sucursal`.`Direccion_sucursal` AS `Direccion_sucursal` from `sucursal` where (`sucursal`.`Nombre_sucursal` in ('Devoto','Palermo','Centro 1 ','Centro 2 ')) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `sucursales_provincia`
+--
+
+/*!50001 DROP VIEW IF EXISTS `sucursales_provincia`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `sucursales_provincia` AS select `sucursal`.`id_sucursal` AS `id_sucursal`,`sucursal`.`Cod_sucursal` AS `Cod_sucursal`,`sucursal`.`Nombre_sucursal` AS `Nombre_sucursal`,`sucursal`.`Tel_sucursal` AS `Tel_sucursal`,`sucursal`.`Direccion_sucursal` AS `Direccion_sucursal` from `sucursal` where (`sucursal`.`Nombre_sucursal` in ('Almagro','Rosario')) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `vista_socios_antiguos`
+--
+
+/*!50001 DROP VIEW IF EXISTS `vista_socios_antiguos`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `vista_socios_antiguos` AS select `socios`.`id_socio` AS `id_socio`,`socios`.`Cod_socio` AS `Cod_socio`,`socios`.`Dni` AS `Dni`,`socios`.`Nombre_soc` AS `Nombre_soc`,`socios`.`Apellido_soc` AS `Apellido_soc`,`socios`.`Tel_socio` AS `Tel_socio`,`socios`.`Direccion_socio` AS `Direccion_socio`,`socios`.`Certificado_medico_activo` AS `Certificado_medico_activo`,`socios`.`Promocion_activa` AS `Promocion_activa`,`socios`.`Sucursal_asiste` AS `Sucursal_asiste`,`socios`.`ID_promocion_activa` AS `ID_promocion_activa`,`socios`.`Obra_social_socios` AS `Obra_social_socios` from `socios` where (`socios`.`id_socio` > 15) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-01-30 21:13:29
